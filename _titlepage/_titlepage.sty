@@ -1,7 +1,21 @@
+% Titlepage dedicated to apprenticeship
+% with the inclusion of school and company.
+% Include the possibilty for a major and a minor headings.
+
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
 \ProvidesPackage{_titlepage}[2016/06/02 TitlePage]
 
 \RequirePackage{graphicx}
+
+\newcommand*{\@school}{}
+\newcommand*{\school}[1]{\gdef\@school{#1}}
+\newcommand*{\@major}{}
+\newcommand*{\major}[1]{\gdef\@major{#1}}
+\newcommand*{\@minor}{}
+\newcommand*{\minor}[1]{\gdef\@minor{#1}}
+
+\newcommand*{\@company}{}
+\newcommand*{\company}[1]{\gdef\@company{#1}}
 
 \renewcommand*{\maketitle}{%
 \begin{titlepage}
@@ -13,16 +27,16 @@
   \rule{\textwidth}{.1pt}}
 
   \vspace{\baselineskip}
-  {\large\scshape
-    UV Entreprise}
+  {\large\scshape\@major\par
+   \normalsize\@minor}
 
   \vfill
   {
     \Large\@author\par
     \bigskip
     \large
-    École des Mines de Nantes\par
-    Nobilito\par
+    \@school\par
+    \@company\par
     \bigskip
     \@date\par
   }
