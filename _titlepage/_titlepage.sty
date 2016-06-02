@@ -1,0 +1,40 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{_titlepage}[2016/06/02 TitlePage]
+
+\RequirePackage{graphicx}
+
+\renewcommand*{\maketitle}{%
+\begin{titlepage}
+  \centering
+  \vspace*{2.5cm}
+
+  {\rule{\textwidth}{.1pt}
+  \Huge\scshape\@title\par
+  \rule{\textwidth}{.1pt}}
+
+  \vspace{\baselineskip}
+  {\large\scshape
+    UV Entreprise}
+
+  \vfill
+  {
+    \Large\@author\par
+    \bigskip
+    \large
+    École des Mines de Nantes\par
+    Nobilito\par
+    \bigskip
+    \@date\par
+  }
+
+  \vspace*{2.5cm}
+
+  {
+    \def\svgwidth{.2\textwidth}
+    \input{img/logo_mines.pdf_tex}
+  }
+  \hspace{.25\textwidth}
+  \includegraphics[width=.15\textwidth]{img/logo_nobilito.png}
+\end{titlepage}
+}
+\endinput
