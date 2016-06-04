@@ -1,0 +1,64 @@
+% Custom headings for chapters
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{_headings}[2016/06/04 Headings]
+
+\RequirePackage{kvoptions}
+\RequirePackage{fancyhdr}
+\RequirePackage{titling}
+\RequirePackage{anyfontsize}
+\RequirePackage{xcolor}
+
+\DeclareStringOption[E8500E]{chapter}
+\DeclareStringOption[CCCCCC]{hdrrule}
+\ProcessKeyvalOptions*
+
+\pagestyle{fancy}
+
+\definecolor{chapter}{HTML}{\csname _headings@chapter\endcsname}
+\definecolor{hdrrule}{HTML}{\csname _headings@hdrrule\endcsname}
+
+% \thechapter calls \chaptermark for styling, 
+% so we redefine it as being only the chapter number
+\renewcommand{\chaptermark}[1]{\markboth{\scshape\if@mainmatter\thechapter.~~\fi#1}{}}
+
+% Chapter headers' new style
+
+% \chapter
+\def\@makechapterhead#1{%
+  {\parindent \z@ \normalfont
+    \raggedleft {\fontsize{50}{55}\selectfont\bfseries\textcolor{chapter}\thechapter}\par\nobreak
+    {\color{chapter}\rule{\textwidth}{.1pt}}
+    \vskip 10\p@
+    \raggedright\interlinepenalty\@M\Huge\bfseries #1\par\nobreak
+    \setlength{\baselineskip}{.5em}
+    \vskip 10\p@
+    {\color{chapter}\rule{\textwidth}{.1pt}}
+    \vskip 40\p@
+  }}
+
+% \chapter*
+\def\@makeschapterhead#1{%
+  \vspace*{10\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Huge\bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+
+% Page header and footer
+\fancyhf{}% Clear header and footer
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\headrule}{{\color{hdrrule}%
+    \hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
+
+% Redefine the plain page style for chapters
+\fancypagestyle{plain}{%
+  \fancyhf{}% Clear header and footer
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\endinput
